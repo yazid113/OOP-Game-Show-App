@@ -3,7 +3,7 @@
  * Phrase.js */
 class Phrase{
     constructor(phrase){
-        this.phrase = phrase.toLowerCase();
+        this.phrase = phrase
     }
 
 /**
@@ -107,7 +107,7 @@ class Phrase{
 * @param (string) letter - Letter to check
 */
     checkLetter(letter) {
-      return game.activePhrase.phrase.includes(letter)   
+      return game.activePhrase.phrase.includes(letter.toLowerCase())   
     };
 
 /**
