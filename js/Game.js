@@ -35,7 +35,7 @@ class Game{
 * Begins game by selecting a random phrase and displaying it to user
 */    
     startGame() {
-        document.querySelector('#overlay').style.display = 'none'
+       document.querySelector('#overlay').style.display = 'none'
        game.activePhrase = game.getRandomPhrase()
        game.activePhrase.addPhraseToDisplay()
     };
@@ -50,7 +50,6 @@ won
             if (phraseList[i].classList.contains('hide')) {
                 return false;
             }
-            
         }
         return true
     };
@@ -60,6 +59,15 @@ won
 * Checks if player has remaining lives and ends game if player is out
 */
     removeLife() {
+        const hearts = document.querySelectorAll('#scoreboard ol li img')
+        console.log(hearts)
+        if (game.missed < 5) {
+            game.missed += 1;
+            hearts[game.missed - 1].setAttribute('src','../images/lostHeart.png')
+        }
+        else{
+            game.gameOver()
+        }
 
     };
 /**
@@ -67,7 +75,16 @@ won
 * @param {boolean} gameWon - Whether or not the user won the game
 */
     gameOver(gameWon) {
-
+        if (!gameWon) {
+            document.querySelector('#overlay').setAttribute('class','lose')
+            document.querySelector('#game-over-message').innerText = 'Sorry, better luck next time!'
+            document.querySelector('#overlay').removeAttribute('style') 
+        }
+        else{
+            document.querySelector('#overlay').setAttribute('class','win')
+            document.querySelector('#game-over-message').innerText = 'Great job!'
+            document.querySelector('#overlay').removeAttribute('style') 
+        }
     };
 /**
 * Handles onscreen keyboard button clicks
