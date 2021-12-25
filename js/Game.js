@@ -32,10 +32,9 @@ class Game{
 * @return {Object} Phrase object chosen to be used
 */
     getRandomPhrase() {
-        let num = Math.floor(Math.random()*this.createPhrases().length)
-        const randomPhrase = this.phrases[num]
-        return randomPhrase
-        
+        let num = Math.floor(Math.random()*this.phrases.length)
+        const randomPhrase = this.phrases[num];
+        return  randomPhrase;
     };
 /**
 * Begins game by selecting a random phrase and displaying it to user
@@ -43,7 +42,7 @@ class Game{
     startGame() {
        document.querySelector('#overlay').style.display = 'none'
        if(document.querySelector('#overlay').classList.contains('win') || document.querySelector('#overlay').classList.contains('lose')) {
-        game.missed = 0;
+        this.missed = 0;
         document.querySelector('#phrase ul').innerHTML = ''
        const key = document.querySelectorAll('#qwerty button')
        for (let i = 0; i < key.length; i++) {
@@ -54,15 +53,14 @@ class Game{
        for (let i = 0; i < hearts.length; i++) {
            hearts[i].setAttribute('src','../images/liveHeart.png')         
          }
-        game.activePhrase = game.getRandomPhrase()
-        game.activePhrase.addPhraseToDisplay() 
+        this.activePhrase = this.getRandomPhrase()
+        this.activePhrase.addPhraseToDisplay() 
        }
        else{
-        game.activePhrase = game.getRandomPhrase()
-        game.activePhrase.addPhraseToDisplay()
-        game.missed = 0;
+
+        this.activePhrase = this.getRandomPhrase()
+        this.activePhrase.addPhraseToDisplay()
        }
-       
     };
 /**
 * Checks for winning move
@@ -85,12 +83,12 @@ won
 */
     removeLife() {
         const hearts = document.querySelectorAll('#scoreboard ol li img')
-        if (game.missed < 4) {
-            game.missed += 1;
-            hearts[game.missed - 1].setAttribute('src','../images/lostHeart.png')
+        if (this.missed < 4) {
+            this.missed += 1;
+            hearts[this.missed - 1].setAttribute('src','../images/lostHeart.png')
         }
         else{
-            game.gameOver()
+            this.gameOver()
         }
 
     };
@@ -99,12 +97,12 @@ won
 * @param {boolean} gameWon - Whether or not the user won the game
 */
     gameOver(gameWon) {
-        if (!gameWon && game.missed === 4) {
+        if (!gameWon && this.missed === 4) {
             document.querySelector('#overlay').setAttribute('class','lose')
             document.querySelector('#game-over-message').innerText = 'Sorry, better luck next time!'
             document.querySelector('#overlay').removeAttribute('style')
         }
-        else if(gameWon && game.missed < 4){
+        else if(gameWon && this.missed < 4){
             document.querySelector('#overlay').setAttribute('class','win')
             document.querySelector('#game-over-message').innerText = 'Great job!'
             document.querySelector('#overlay').removeAttribute('style')
@@ -115,15 +113,16 @@ won
 * @param (HTMLButtonElement) button - The clicked button element
 */
 handleInteraction(button) {
+    console.log(button.target.innerText)
     button.target.disabled = true;
-    if (game.activePhrase.checkLetter(button.target.innerText)) {
-        game.activePhrase.showMatchedLetter(button.target.innerText)
+    if (this.activePhrase.checkLetter(button.target.textContent)) {
+        this.activePhrase.showMatchedLetter(button.target.textContent)
         button.target.setAttribute('class','chosen')
-        game.gameOver(game.checkForWin())
+        this.gameOver(this.checkForWin())
         
         }
         else{
-        game.removeLife()
+        this.removeLife()
         button.target.setAttribute('class','wrong')
         }
     

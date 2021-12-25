@@ -12,16 +12,14 @@ class Phrase{
     addPhraseToDisplay(){
     const phraseContainer = document.querySelector('#phrase ul')
     let html =``;
-    for (let i = 0; i < game.activePhrase.phrase.length; i++) {
+    for (let i = 0; i < this.phrase.length; i++) {
         let li=document.createElement('li')
-        if(game.activePhrase.phrase[i] !== ' '){
-            li = `<li class = 'hide letter ${game.activePhrase.phrase[i]}'>${game.activePhrase.phrase[i]}</li>`
-            console.log(li)
+        if(this.phrase[i] !== ' '){
+            li = `<li class = 'hide letter ${this.phrase[i]}'>${this.phrase[i]}</li>`
             html += li        
     }
-        else if(game.activePhrase.phrase[i] === ' '){
+        else if(this.phrase[i] === ' '){
             li = `<li class = space> </li>`
-            console.log(li)
             html += li
             
         }       
@@ -33,7 +31,7 @@ class Phrase{
 * @param (string) letter - Letter to check
 */
     checkLetter(letter) {
-      return game.activePhrase.phrase.includes(letter.toLowerCase())   
+      return this.phrase.includes(letter.toLowerCase())   
     };
 
 /**
@@ -43,7 +41,7 @@ class Phrase{
     showMatchedLetter(letter) {
     const phraseList = document.querySelectorAll('#phrase ul li')
     for (let i = 0; i < phraseList.length; i++) {
-      if(game.activePhrase.checkLetter(letter) && phraseList[i].innerText === letter){
+      if(phraseList[i].innerText === letter){
                 phraseList[i].classList = `show letter ${[phraseList[i].innerText]}`
             }        
         }
