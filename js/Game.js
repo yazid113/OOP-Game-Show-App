@@ -17,6 +17,12 @@ class Game{
             new Phrase ("ciao bambino"),
             new Phrase ("back to the future"),
             new Phrase ("my precious"),
+            new Phrase ("you complete me"),
+            new Phrase ("houston we have a problem"),
+            new Phrase ("i am your father"),
+            new Phrase ("show me the money"),
+            new Phrase ("avengers assemble"),
+            new Phrase ("to infinity and beyond"),
             new Phrase ("hasta la vista baby")
         ]
         return phr;
