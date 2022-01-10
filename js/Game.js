@@ -51,7 +51,7 @@ class Game{
         }
        const hearts = document.querySelectorAll('#scoreboard ol li img')
        for (let i = 0; i < hearts.length; i++) {
-           hearts[i].setAttribute('src','../images/liveHeart.png')         
+           hearts[i].setAttribute('src','images/liveHeart.png')         
          }
         this.activePhrase = this.getRandomPhrase()
         this.activePhrase.addPhraseToDisplay() 
@@ -85,7 +85,7 @@ won
         const hearts = document.querySelectorAll('#scoreboard ol li img')
         if (this.missed < 4) {
             this.missed += 1;
-            hearts[this.missed - 1].setAttribute('src','../images/lostHeart.png')
+            hearts[this.missed - 1].setAttribute('src','images/lostHeart.png')
         }
         else{
             this.gameOver()
